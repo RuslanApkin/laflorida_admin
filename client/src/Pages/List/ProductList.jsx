@@ -1,4 +1,5 @@
 import React from "react";
+import { SideBar } from "../../Components/SideBar";
 import Table, {
   ImgCell,
   SelectColumnFilter,
@@ -217,17 +218,12 @@ export const ProductList = () => {
   const data = React.useMemo(() => getData(), []);
 
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-900">
-      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
-        <div className="">
-          <h1 className="text-xl font-semibold">
-            React Table + Tailwind CSS = ❤
-          </h1>
-        </div>
-        <div className="mt-6">
-          <Table columns={columns} data={data} />
-        </div>
-      </main>
+    <div className="flex flex-row">
+      <SideBar />
+      <div className="block lg:w-60 shrink-0"></div>
+      <div className="min-h-screen text-gray-900 sm:px-6 lg:px-8 pt-4 mt-6 mx-auto w-full max-w-6xl px-4">
+        <Table columns={columns} data={data} />
+      </div>
     </div>
   );
 };

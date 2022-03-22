@@ -5,7 +5,7 @@ import LoginScreen from "./Components/Auth/LoginScreen";
 import PrivateScreen from "./Components/Auth/PrivateScreen";
 import RegisterScreen from "./Components/Auth/RegisterScreen";
 import ResetPasswordScreen from "./Components/Auth/ResetPasswordScreen";
-import { ProductList } from "./Pages/ProductList/ProductList";
+import { ProductList } from "./Pages/List/ProductList";
 import PrivateRoute from "./routing/PrivateRoute";
 
 const App = () => {
