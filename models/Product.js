@@ -1,15 +1,15 @@
 // const mongoose = require("mongoose");
 
 // const ProductSchema = new mongoose.Schema({
-//     ProductName: {
+//     productName: {
 //         type: String,
 //         required: [true, "Пожалуйста введите название"],
 //         unique: true
 //     },
-//     Category: {
+//     category: {
 //         type: [String]
 //     },
-//     Author: {
+//     author: {
 //         type: Schema.Types.ObjectId,
 //     }
 // })
