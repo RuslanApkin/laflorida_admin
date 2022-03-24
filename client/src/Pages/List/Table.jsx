@@ -38,10 +38,10 @@ function GlobalFilter({
 
   return (
     <label className="flex gap-x-2 items-baseline">
-      <span className="text-gray-700">Search: </span>
+      <span className="text-gray-700">Поиск: </span>
       <input
         type="text"
-        className="rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+        className="rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 p-1"
         value={value || ""}
         onChange={(e) => {
           setValue(e.target.value);
@@ -73,7 +73,7 @@ export function SelectColumnFilter({
     <label className="flex gap-x-2 items-baseline">
       <span className="text-gray-700">{render("Header")}: </span>
       <select
-        className="rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+        className="rounded-md border-gray-300 bg-white shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 p-1"
         name={id}
         id={id}
         value={filterValue}
@@ -317,7 +317,7 @@ function Table({
       <div className="py-3 flex items-center justify-between">
         <div className="flex-1 flex justify-between sm:hidden">
           <Button onClick={() => previousPage()} disabled={!canPreviousPage}>
-            Previous
+            Предыдущая
           </Button>
           <span className="text-sm text-gray-700">
             Page{" "}
@@ -336,19 +336,20 @@ function Table({
           </span>
 
           <Button onClick={() => nextPage()} disabled={!canNextPage}>
-            Next
+            Следующая
           </Button>
         </div>
         <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
           <div className="flex gap-x-2 items-baseline">
             <span className="text-sm text-gray-700">
-              Page <span className="font-medium">{state.pageIndex + 1}</span> of{" "}
+              Страница{" "}
+              <span className="font-medium">{state.pageIndex + 1}</span> из{" "}
               <span className="font-medium">{pageOptions.length}</span>
             </span>
             <label>
-              <span className="sr-only">Items Per Page</span>
+              <span className="sr-only">Товаров на странице</span>
               <select
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 p-1 bg-white"
                 value={state.pageSize}
                 onChange={(e) => {
                   setPageSize(Number(e.target.value));
@@ -356,7 +357,7 @@ function Table({
               >
                 {[5, 10, 20].map((pageSize) => (
                   <option key={pageSize} value={pageSize}>
-                    Show {pageSize}
+                    Показать {pageSize}
                   </option>
                 ))}
               </select>

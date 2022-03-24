@@ -192,21 +192,21 @@ export const ProductList = () => {
         imgAccessor: "imgUrl",
       },
       {
-        Header: "About",
+        Header: "Название",
         accessor: "title",
       },
       {
-        Header: "Price",
+        Header: "Цена",
         accessor: "price",
       },
       {
-        Header: "Status",
+        Header: "Статус",
         accessor: "status",
         Filter: SelectColumnFilter,
         Cell: StatusPill,
       },
       {
-        Header: "Link",
+        Header: "Ссылка",
         accessor: "role",
         Cell: LinkCell,
         disableSortBy: true,
@@ -218,10 +218,11 @@ export const ProductList = () => {
   const data = React.useMemo(() => getData(), []);
 
   return (
-    <div className="flex flex-row">
-      <SideBar />
-      <div className="block lg:w-60 shrink-0"></div>
-      <div className="min-h-screen text-gray-900 sm:px-6 lg:px-8 pt-4 mt-6 mx-auto w-full max-w-6xl px-4">
+    <div className="flex flex-row bg-gray-100">
+      <SideBar page="List" />
+      <div className="block lg:w-52 shrink-0"></div>
+      <div className="min-h-screen text-gray-700 sm:px-6 lg:px-8 pt-4 mx-auto w-full max-w-6xl px-4">
+        <h2 className="mb-4 text-xl">Список товаров</h2>
         <Table columns={columns} data={data} />
       </div>
     </div>
