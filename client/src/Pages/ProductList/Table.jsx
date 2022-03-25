@@ -38,10 +38,10 @@ function GlobalFilter({
 
   return (
     <label className="flex gap-x-2 items-baseline">
-      <span className="text-gray-700">Поиск: </span>
+      <span className="">Поиск: </span>
       <input
         type="text"
-        className="rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 p-1"
+        className="rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 p-1 dark:bg-gray-700"
         value={value || ""}
         onChange={(e) => {
           setValue(e.target.value);
@@ -71,9 +71,9 @@ export function SelectColumnFilter({
   // Render a multi-select box
   return (
     <label className="flex gap-x-2 items-baseline">
-      <span className="text-gray-700">{render("Header")}: </span>
+      <span className="">{render("Header")}: </span>
       <select
-        className="rounded-md border-gray-300 bg-white shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 p-1"
+        className="rounded-md border-gray-300 bg-white dark:bg-gray-700 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 p-1"
         name={id}
         id={id}
         value={filterValue}
@@ -99,11 +99,15 @@ export function StatusPill({ value }) {
     <span
       className={classNames(
         "relative uppercase leading-wide font-bold text-xs select-none z-20 before:block before:absolute before:-inset-[20%] before:-z-10 before:rounded-full before:shadow-sm",
-        status.startsWith("active") ? "before:bg-gray-50 text-accent" : null,
-        status.startsWith("inactive")
-          ? "before:bg-yellow-100 text-yellow-800"
+        status.startsWith("active")
+          ? "before:bg-gray-50 text-accent dark:before:bg-gray-800/80 dark:text-accent"
           : null,
-        status.startsWith("offline") ? "before:bg-red-100 text-red-800" : null
+        status.startsWith("inactive")
+          ? "before:bg-yellow-100 text-yellow-800 dark:before:bg-yellow-600/95 dark:text-yellow-50"
+          : null,
+        status.startsWith("offline")
+          ? "before:bg-red-100 text-red-800 dark:before:bg-red-600/95 dark:text-red-200"
+          : null
       )}
     >
       {status}
@@ -127,7 +131,7 @@ export function LinkCell({ value }) {
   return (
     <Link
       to={"/edit/${value}"}
-      className="text-sm font-medium text-gray-500 flex flex-row gap-1 hover:text-accent hover:underline"
+      className="text-sm font-medium flex flex-row gap-1 hover:text-accent underline"
     >
       <span>Изменить</span> <PencilAltIcon className="w-4" />
     </Link>
@@ -238,12 +242,12 @@ function Table({
       <div className="mt-4 flex flex-col">
         <div className="-my-2 overflow-x-auto -mx-4 sm:-mx-6 lg:-mx-8">
           <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-            <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+            <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg dark:border-gray-900">
               <table
                 {...getTableProps()}
-                className="min-w-full divide-y divide-gray-200"
+                className="min-w-full divide-y divide-gray-200 dark:divide-gray-900"
               >
-                <thead className="bg-gray-50">
+                <thead className="bg-gray-50 dark:bg-gray-900">
                   {headerGroups.map((headerGroup) => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
                       {headerGroup.headers.map((column) => (
@@ -251,7 +255,7 @@ function Table({
                         // we can add them into the header props
                         <th
                           scope="col"
-                          className="group px-4 first:pr-0 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider"
+                          className="group px-4 first:pr-0 py-3 text-xs font-medium uppercase tracking-wider"
                           {...column.getHeaderProps(
                             column.getSortByToggleProps()
                           )}
@@ -263,12 +267,12 @@ function Table({
                               <span>
                                 {column.isSorted ? (
                                   column.isSortedDesc ? (
-                                    <SortDownIcon className="w-4 h-4 text-gray-400" />
+                                    <SortDownIcon className="w-4 h-4" />
                                   ) : (
-                                    <SortUpIcon className="w-4 h-4 text-gray-400" />
+                                    <SortUpIcon className="w-4 h-4" />
                                   )
                                 ) : (
-                                  <SortIcon className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100" />
+                                  <SortIcon className="w-4 h-4 opacity-0 group-hover:opacity-100" />
                                 )}
                               </span>
                             ) : null}
@@ -280,7 +284,7 @@ function Table({
                 </thead>
                 <tbody
                   {...getTableBodyProps()}
-                  className="bg-white divide-y divide-gray-200"
+                  className="bg-white divide-y divide-gray-200 dark:bg-gray-700 dark:divide-gray-900"
                 >
                   {page.map((row, i) => {
                     // new
@@ -295,9 +299,7 @@ function Table({
                               role="cell"
                             >
                               {cell.column.Cell.name === "defaultRenderer" ? (
-                                <div className="text-sm text-gray-500">
-                                  {cell.render("Cell")}
-                                </div>
+                                <div className="">{cell.render("Cell")}</div>
                               ) : (
                                 cell.render("Cell")
                               )}
@@ -319,7 +321,7 @@ function Table({
           <Button onClick={() => previousPage()} disabled={!canPreviousPage}>
             Предыдущая
           </Button>
-          <span className="text-sm text-gray-700">
+          <span className="text-sm">
             Page{" "}
             <input
               type="number"
@@ -330,7 +332,7 @@ function Table({
                 const page = e.target.value ? Number(e.target.value) - 1 : 0;
                 gotoPage(page);
               }}
-              className="w-[3.5em] py-2 pl-2 pr-1 border border-gray-300 rounded-md"
+              className="w-[3.5em] py-2 pl-2 pr-1 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-500"
             />{" "}
             of <span className="font-medium">{pageOptions.length}</span>
           </span>
@@ -341,7 +343,7 @@ function Table({
         </div>
         <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
           <div className="flex gap-x-2 items-baseline">
-            <span className="text-sm text-gray-700">
+            <span className="text-sm">
               Страница{" "}
               <span className="font-medium">{state.pageIndex + 1}</span> из{" "}
               <span className="font-medium">{pageOptions.length}</span>
@@ -349,7 +351,7 @@ function Table({
             <label>
               <span className="sr-only">Товаров на странице</span>
               <select
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 p-1 bg-white"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 p-1 bg-white dark:bg-gray-700"
                 value={state.pageSize}
                 onChange={(e) => {
                   setPageSize(Number(e.target.value));
@@ -398,7 +400,7 @@ function Table({
                   const page = e.target.value ? Number(e.target.value) - 1 : 0;
                   gotoPage(page);
                 }}
-                className="w-[3.5em] py-2 pl-2 pr-1 border border-gray-300"
+                className="w-[3.5em] py-2 pl-2 pr-1 border border-gray-300 dark:bg-gray-700 dark:border-gray-800"
               />
               <PageButton onClick={() => nextPage()} disabled={!canNextPage}>
                 <span className="sr-only">Next</span>

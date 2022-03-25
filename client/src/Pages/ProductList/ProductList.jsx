@@ -1,5 +1,4 @@
 import React from "react";
-import { SideBar } from "../../Components/SideBar";
 import Table, {
   ImgCell,
   SelectColumnFilter,
@@ -218,13 +217,9 @@ export const ProductList = () => {
   const data = React.useMemo(() => getData(), []);
 
   return (
-    <div className="flex flex-row bg-gray-100">
-      <SideBar page="List" />
-      <div className="block lg:w-52 shrink-0"></div>
-      <div className="min-h-screen text-gray-700 sm:px-6 lg:px-8 pt-4 mx-auto w-full max-w-6xl px-4">
-        <h2 className="mb-4 text-xl">Список товаров</h2>
-        <Table columns={columns} data={data} />
-      </div>
-    </div>
+    <>
+      <h2 className="mb-4 text-xl">Список товаров</h2>
+      <Table columns={columns} data={data} />
+    </>
   );
 };
