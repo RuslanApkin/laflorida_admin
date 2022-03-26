@@ -13,11 +13,11 @@ import {
 import { classNames } from "./shared/Utils";
 
 const navTabs = [
-  { name: "Карточки", url: "/" },
-  { name: "Заказы", url: "/" },
+  { name: "Карточки", url: "/cards" },
+  { name: "Заказы", url: "/orders" },
   { name: "Категории", url: "/categories" },
   { name: "Товары", url: "/list" },
-  { name: "Добавить", url: "/" },
+  { name: "Добавить", url: "/add" },
 ];
 
 export const SideBar = ({ page }) => {

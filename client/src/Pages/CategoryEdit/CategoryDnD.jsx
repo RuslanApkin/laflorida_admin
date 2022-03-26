@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { TrashIcon } from "@heroicons/react/outline";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { classNames } from "../../Components/shared/Utils";
 
 // fake data generator
 const getItems = (count, offset = 0) =>
@@ -86,27 +88,25 @@ export default function CategoryDnD() {
         onClick={() => {
           setState([...state, []]);
         }}
+        className="rounded-md px-2 py-1 bg-gray-300"
       >
-        Add new group
+        Добавить категорию
       </button>
       <button
         type="button"
         onClick={() => {
           setState([...state, getItems(1)]);
         }}
+        className="rounded-md px-2 py-1 bg-gray-300"
       >
-        Add new item
+        Добавить подкатегорию
       </button>
-      <div style={{ display: "flex" }}>
+      <div className="flex rounded-md overflow-hidden mt-2 bg-gray-50">
         <DragDropContext onDragEnd={onDragEnd}>
           {state.map((el, ind) => (
             <Droppable key={ind} droppableId={`${ind}`}>
               {(provided, snapshot) => (
-                <div
-                  ref={provided.innerRef}
-                  style={getListStyle(snapshot.isDraggingOver)}
-                  {...provided.droppableProps}
-                >
+                <div ref={provided.innerRef} className="p-2">
                   {el.map((item, index) => (
                     <Draggable
                       key={item.id}
@@ -118,17 +118,11 @@ export default function CategoryDnD() {
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
-                          style={getItemStyle(
-                            snapshot.isDragging,
-                            provided.draggableProps.style
+                          className={classNames(
+                            "p-2 w-40 rounded-md mb-2 bg-gray-100"
                           )}
                         >
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-around",
-                            }}
-                          >
+                          <div className="flex justify-around">
                             {item.content}
                             <button
                               type="button"
@@ -140,7 +134,7 @@ export default function CategoryDnD() {
                                 );
                               }}
                             >
-                              delete
+                              <TrashIcon className="h-5 w-5 text-pink-500" />
                             </button>
                           </div>
                         </div>
