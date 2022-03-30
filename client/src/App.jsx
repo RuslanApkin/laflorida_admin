@@ -5,7 +5,11 @@ import LoginScreen from "./Components/Auth/LoginScreen";
 import PrivateScreen from "./Components/Auth/PrivateScreen";
 import RegisterScreen from "./Components/Auth/RegisterScreen";
 import ResetPasswordScreen from "./Components/Auth/ResetPasswordScreen";
+import AddProduct from "./Pages/AddProduct/AddProduct";
+import CardList from "./Pages/CardList/CardList";
 import CategoryEdit from "./Pages/CategoryEdit/CategoryEdit";
+import Home from "./Pages/Home/Home";
+import OrderList from "./Pages/OrderList/OrderList";
 import { ProductList } from "./Pages/ProductList/ProductList";
 import PrivateRoute from "./routing/PrivateRoute";
 
@@ -17,7 +21,7 @@ const App = () => {
           path="/"
           element={
             <PrivateRoute page="/">
-              <PrivateScreen />
+              <Home />
             </PrivateRoute>
           }
         />
@@ -30,10 +34,34 @@ const App = () => {
           }
         />
         <Route
-          path="/list"
+          path="/productlist"
           element={
             <PrivateRoute page="Товары">
               <ProductList />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/orderlist"
+          element={
+            <PrivateRoute page="Заказы">
+              <OrderList />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/add"
+          element={
+            <PrivateRoute page="Добавить">
+              <AddProduct />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/cardlist"
+          element={
+            <PrivateRoute page="Карточки">
+              <CardList />
             </PrivateRoute>
           }
         />

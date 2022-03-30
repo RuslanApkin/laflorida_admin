@@ -13,10 +13,10 @@ import {
 import { classNames } from "./shared/Utils";
 
 const navTabs = [
-  { name: "Карточки", url: "/cards" },
-  { name: "Заказы", url: "/orders" },
+  { name: "Карточки", url: "/cardlist" },
+  { name: "Заказы", url: "/orderlist" },
   { name: "Категории", url: "/categories" },
-  { name: "Товары", url: "/list" },
+  { name: "Товары", url: "/productlist" },
   { name: "Добавить", url: "/add" },
 ];
 
@@ -29,10 +29,13 @@ export const SideBar = ({ page }) => {
 
   return (
     <div className="bg-white h-screen hidden fixed lg:block lg:w-52 left-0 top-0 px-4 border border-gray-300  text-lg text-gray-700 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-900">
-      <div className="py-3 border-b border-gray-300 mb-2 flex flex-row gap-2 items-center justify-center select-none">
+      <NavLink
+        to="/"
+        className="py-3 border-b border-gray-300 mb-2 flex flex-row gap-2 items-center justify-center select-none"
+      >
         <CubeIcon className="h-14" />
         <h1 className="leading-snug font-semibold basis-0">LaFlorida Admin</h1>
-      </div>
+      </NavLink>
       <nav className="flex flex-col gap-1">
         {navTabs.map((navTab) => (
           <NavLink
