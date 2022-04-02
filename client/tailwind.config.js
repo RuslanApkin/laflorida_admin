@@ -13,6 +13,8 @@ module.exports = {
       pink: colors.pink,
       yellow: colors.yellow,
       red: colors.red,
+      indigo: colors.indigo,
+      orange: colors.orange,
     },
   },
   plugins: [require("@tailwindcss/aspect-ratio")],

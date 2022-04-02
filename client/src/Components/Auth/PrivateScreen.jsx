@@ -7,7 +7,7 @@ const PrivateScreen = () => {
   const [privateData, setPrivateData] = useState("");
 
   useEffect(() => {
-    const fetchPrivateDate = async () => {
+    const fetchPrivateData = async () => {
       const config = {
         headers: {
           "Content-Type": "application/json",
@@ -21,13 +21,13 @@ const PrivateScreen = () => {
           config
         );
         setPrivateData(data.data);
-      } catch (error) {
+      } catch (err) {
         localStorage.removeItem("authToken");
         setError("You are not authorized please login");
       }
     };
 
-    fetchPrivateDate();
+    fetchPrivateData();
   }, []);
   return error ? (
     <span className="error-message">{error}</span>

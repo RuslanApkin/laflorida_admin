@@ -35,10 +35,10 @@ const LoginScreen = ({ history }) => {
       localStorage.setItem("authToken", data.token);
 
       navigate(from, { replace: true });
-    } catch (error) {
-      setError(error.response.data.error);
+    } catch (err) {
+      setError(err.response.data.error);
       setTimeout(() => {
-        setError("");
+        setError(error);
       }, 5000);
     }
   };
@@ -57,8 +57,8 @@ const LoginScreen = ({ history }) => {
         <input
           type="email"
           id="email"
-          value={email}
           className="input_area"
+          value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
           tabIndex={1}
@@ -67,10 +67,10 @@ const LoginScreen = ({ history }) => {
         <input
           type="password"
           id="password"
+          className="input_area"
           required
           autoComplete="true"
           value={password}
-          className="input_area"
           onChange={(e) => setPassword(e.target.value)}
           tabIndex={2}
         />

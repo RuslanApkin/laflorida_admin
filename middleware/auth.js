@@ -20,12 +20,11 @@ exports.protect = async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     const user = await User.findById(decoded.id);
-
     if (!user) {
       return next(new ErrorResponse("No user found with this id", 404));
     }
 
-    req.user = user;
+    res.auth = user;
 
     next();
   } catch (err) {

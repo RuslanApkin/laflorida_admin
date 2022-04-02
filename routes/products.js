@@ -10,12 +10,12 @@ const {
   deleteProduct,
 } = require("../controllers/products");
 
-router.route("/create").post(createProduct);
+router.route("/create").post(protect, createProduct);
 
-router.route("/read").get(readProduct);
+router.route("/read").get(protect, readProduct);
 
-router.route("/update/:id").put(updateProduct);
+router.route("/update/:id").put(protect, updateProduct);
 
-router.route("/delete").delete(deleteProduct);
+router.route("/delete").delete(protect, deleteProduct);
 
 module.exports = router;

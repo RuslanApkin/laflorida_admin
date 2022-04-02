@@ -130,7 +130,7 @@ export function ImgCell({ value, column, row }) {
 export function LinkCell({ value }) {
   return (
     <Link
-      to={"/edit/${value}"}
+      to={"edit/".concat(value)}
       className="text-sm font-medium flex flex-row gap-1 hover:text-accent underline"
     >
       <span>Изменить</span> <PencilAltIcon className="w-4" />

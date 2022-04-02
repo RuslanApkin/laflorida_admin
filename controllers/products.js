@@ -29,7 +29,7 @@ exports.readProduct = async (req, res, next) => {
     if (!query.length) {
       return next(new ErrorResponse("Товар не найден", 404));
     }
-    res.status(200).json(query);
+    res.status(200).json({ success: true, data: query });
   } catch (err) {
     next(err);
   }
