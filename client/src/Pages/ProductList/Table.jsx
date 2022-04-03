@@ -23,6 +23,7 @@ import {
   SortUpIcon,
   SortDownIcon,
 } from "../../Components/shared/Icons";
+import defaultImg from "../../img/cropped-favicon-2-1-192x192.png";
 
 // Define a default UI for filtering
 function GlobalFilter({
@@ -98,14 +99,14 @@ export function StatusPill({ value }) {
   return (
     <span
       className={classNames(
-        "relative uppercase leading-wide font-bold text-xs select-none z-20 before:block before:absolute before:-inset-[20%] before:-z-10 before:rounded-full before:shadow-sm",
-        status.startsWith("В продаже")
+        "relative uppercase leading-wide font-bold text-xs select-none z-20 before:block before:absolute before:-inset-[0.4rem] before:-z-10 before:rounded-full before:shadow-sm",
+        status.startsWith("в продаже")
           ? "before:bg-gray-50 text-accent dark:before:bg-gray-800/80 dark:text-accent"
           : null,
-        status.startsWith("Нет в наличии")
+        status.startsWith("нет в наличии")
           ? "before:bg-yellow-100 text-yellow-800 dark:before:bg-yellow-600/95 dark:text-yellow-50"
           : null,
-        status.startsWith("Скрыто")
+        status.startsWith("скрыто")
           ? "before:bg-red-100 text-red-800 dark:before:bg-red-600/95 dark:text-red-200"
           : null
       )}
@@ -120,7 +121,7 @@ export function ImgCell({ value, column, row }) {
     <div className="flex-shrink-0 h-14 w-14">
       <img
         className="h-full w-full rounded-md object-contain object-center"
-        src={row.original[column.imgAccessor]}
+        src={row.original[column.imgAccessor] || defaultImg}
         alt=""
       />
     </div>

@@ -2,10 +2,19 @@ const ErrorResponse = require("../utils/errorResponse");
 const Products = require("../models/Product");
 
 exports.createProduct = async (req, res, next) => {
-  const { title, description, price, status } = req.body;
+  const { title, description, price, status, category, imgUrl, composition } =
+    req.body;
 
   if (!title || !price || !status) {
     return next(new ErrorResponse("Не все поля заполненны", 400));
+  }
+
+  const product = await Products.findOne({ title });
+
+  if (product) {
+    return next(
+      new ErrorResponse("Товар с таким названием уже существует", 401)
+    );
   }
 
   try {
@@ -14,6 +23,9 @@ exports.createProduct = async (req, res, next) => {
       description,
       price,
       status,
+      category,
+      imgUrl,
+      composition,
     });
     res.status(200).json({ success: true, data: "Товар добавлен" });
   } catch (err) {

@@ -21,16 +21,16 @@ const ProductSchema = new mongoose.Schema({
     type: String,
     required: [true, "Укажите статус"],
   },
-  //   category: {
-  //     type: [mongoose.Schema.Types.ObjectId],
-  //     required: [true, "Укажите категорию"],
-  //   },
-  //   composition: {
-  //     type: [mongoose.Schema.Types.ObjectId],
-  //   },
-  //   imgUrl: {
-  //     type: String,
-  //   },
+  category: {
+    type: String,
+    required: [true, "Укажите категорию"],
+  },
+  composition: {
+    type: [String],
+  },
+  imgUrl: {
+    type: String,
+  },
   //   author: {
   //     type: mongoose.Schema.Types.ObjectId,
   //   },

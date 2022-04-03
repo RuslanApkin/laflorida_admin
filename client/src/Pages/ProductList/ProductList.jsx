@@ -108,6 +108,10 @@ export const ProductList = () => {
         accessor: "price",
       },
       {
+        Header: "Категория",
+        accessor: "category",
+      },
+      {
         Header: "Статус",
         accessor: "status",
         Filter: SelectColumnFilter,

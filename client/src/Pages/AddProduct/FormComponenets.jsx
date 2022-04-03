@@ -4,9 +4,7 @@ import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import { WithContext as ReactTags } from "react-tag-input";
 import styles from "./ReactTags.css";
 
-export function MyListbox({ items }) {
-  const [selected, setSelected] = useState(items[0]);
-
+export function MyListbox({ items, selected, setSelected }) {
   return (
     <Listbox value={selected} onChange={setSelected}>
       <div className="relative mt-1">
@@ -62,14 +60,7 @@ const KeyCodes = {
 
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
-export function ReactTagsDemo(props) {
-  const [tags, setTags] = useState([
-    { id: "Thailand", text: "Thailand" },
-    { id: "India", text: "India" },
-    { id: "Vietnam", text: "Vietnam" },
-    { id: "Turkey", text: "Turkey" },
-  ]);
-
+export function ReactTagsDemo({ tags, setTags }) {
   const handleDelete = (i) => {
     setTags(tags.filter((tag, index) => index !== i));
   };
@@ -108,18 +99,12 @@ export function ReactTagsDemo(props) {
         onClearAll={onClearAll}
         onTagUpdate={onTagUpdate}
         suggestions={[
-          { id: "1", text: "Albania" },
-          { id: "2", text: "Australia" },
-          { id: "3", text: "France" },
-          { id: "4", text: "India" },
-          { id: "5", text: "Oman" },
-          { id: "6", text: "Russia" },
-          { id: "7", text: "Serbia" },
-          { id: "8", text: "Swaziland" },
-          { id: "9", text: "United States of America" },
-          { id: "10", text: "Vietnam" },
+          { id: "1", text: "Розы" },
+          { id: "2", text: "Бумага" },
+          { id: "3", text: "Хризантемы" },
+          { id: "4", text: "Тюльпаны" },
         ]}
-        placeholder="Начните вводить"
+        placeholder="Поиск..."
         minQueryLength={1}
         maxLength={30}
         autofocus={false}
