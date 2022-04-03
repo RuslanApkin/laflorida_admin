@@ -99,13 +99,13 @@ export function StatusPill({ value }) {
     <span
       className={classNames(
         "relative uppercase leading-wide font-bold text-xs select-none z-20 before:block before:absolute before:-inset-[20%] before:-z-10 before:rounded-full before:shadow-sm",
-        status.startsWith("active")
+        status.startsWith("В продаже")
           ? "before:bg-gray-50 text-accent dark:before:bg-gray-800/80 dark:text-accent"
           : null,
-        status.startsWith("inactive")
+        status.startsWith("Нет в наличии")
           ? "before:bg-yellow-100 text-yellow-800 dark:before:bg-yellow-600/95 dark:text-yellow-50"
           : null,
-        status.startsWith("offline")
+        status.startsWith("Скрыто")
           ? "before:bg-red-100 text-red-800 dark:before:bg-red-600/95 dark:text-red-200"
           : null
       )}

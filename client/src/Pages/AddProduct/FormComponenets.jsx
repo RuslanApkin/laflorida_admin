@@ -1,6 +1,8 @@
 import React, { useState, Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
+import { WithContext as ReactTags } from "react-tag-input";
+import styles from "./ReactTags.css";
 
 export function MyListbox({ items }) {
   const [selected, setSelected] = useState(items[0]);
@@ -50,5 +52,88 @@ export function MyListbox({ items }) {
         </Transition>
       </div>
     </Listbox>
+  );
+}
+
+const KeyCodes = {
+  comma: 188,
+  enter: 13,
+};
+
+const delimiters = [KeyCodes.comma, KeyCodes.enter];
+
+export function ReactTagsDemo(props) {
+  const [tags, setTags] = useState([
+    { id: "Thailand", text: "Thailand" },
+    { id: "India", text: "India" },
+    { id: "Vietnam", text: "Vietnam" },
+    { id: "Turkey", text: "Turkey" },
+  ]);
+
+  const handleDelete = (i) => {
+    setTags(tags.filter((tag, index) => index !== i));
+  };
+
+  const handleAddition = (tag) => {
+    setTags([...tags, tag]);
+  };
+
+  const handleDrag = (tag, currPos, newPos) => {
+    const newTags = [...tags].slice();
+
+    newTags.splice(currPos, 1);
+    newTags.splice(newPos, 0, tag);
+
+    setTags(newTags);
+  };
+
+  const onClearAll = () => {
+    console.log(tags);
+    setTags([]);
+  };
+
+  const onTagUpdate = (i, newTag) => {
+    const updatedTags = tags.slice();
+    updatedTags.splice(i, 1, newTag);
+    setTags(updatedTags);
+  };
+
+  return (
+    <div className={styles.ReactTags}>
+      <ReactTags
+        handleDelete={handleDelete}
+        handleAddition={handleAddition}
+        handleDrag={handleDrag}
+        delimiters={delimiters}
+        onClearAll={onClearAll}
+        onTagUpdate={onTagUpdate}
+        suggestions={[
+          { id: "1", text: "Albania" },
+          { id: "2", text: "Australia" },
+          { id: "3", text: "France" },
+          { id: "4", text: "India" },
+          { id: "5", text: "Oman" },
+          { id: "6", text: "Russia" },
+          { id: "7", text: "Serbia" },
+          { id: "8", text: "Swaziland" },
+          { id: "9", text: "United States of America" },
+          { id: "10", text: "Vietnam" },
+        ]}
+        placeholder="Начните вводить"
+        minQueryLength={1}
+        maxLength={30}
+        autofocus={false}
+        allowDeleteFromEmptyInput={true}
+        autocomplete={true}
+        readOnly={false}
+        allowUnique={true}
+        allowDragDrop={true}
+        inline={true}
+        allowAdditionFromPaste={true}
+        editable={false}
+        clearAll={true}
+        tags={tags}
+      />
+    </div>
   );
 }

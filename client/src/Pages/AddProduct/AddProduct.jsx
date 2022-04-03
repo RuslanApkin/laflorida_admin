@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import { MyListbox } from "./FormComponenets";
+import { MyListbox, ReactTagsDemo } from "./FormComponenets";
 
-const items = [
-  { id: 1, name: "Durward Reynolds", unavailable: false },
-  { id: 2, name: "Kenton Towne", unavailable: false },
-  { id: 3, name: "Therese Wunsch", unavailable: false },
-  { id: 4, name: "Benedict Kessler", unavailable: true },
-  { id: 5, name: "Katelyn Rohan", unavailable: false },
+const items1 = [
+  { id: 1, name: "Букет", unavailable: false },
+  { id: 2, name: "Семена", unavailable: false },
+  { id: 3, name: "Что-то еще", unavailable: false },
+];
+
+const items2 = [
+  { id: 1, name: "В продаже", unavailable: false },
+  { id: 2, name: "Нет в наличии", unavailable: false },
+  { id: 3, name: "Скрыто", unavailable: false },
 ];
 
 export default function AddProduct() {
@@ -19,7 +23,7 @@ export default function AddProduct() {
     <div className="">
       <h2 className="mb-4 text-xl">Добавление товаров</h2>
       <form
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 items-start relative pb-20"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 items-start relative pb-20 mb-20"
         method="POST"
         onSubmit={addProductHandler}
       >
@@ -35,11 +39,11 @@ export default function AddProduct() {
         </label>
         <label htmlFor="category" className="z-20">
           Категория
-          <MyListbox id="category" items={items} />
+          <MyListbox id="category" items={items1} />
         </label>
         <label htmlFor="status" className="z-20">
           Статус
-          <MyListbox id="status" items={items} />
+          <MyListbox id="status" items={items2} />
         </label>
         <label htmlFor="price" className="flex flex-col">
           Цена
@@ -60,8 +64,8 @@ export default function AddProduct() {
             file:mr-4 file:py-1 file:px-3
             file:rounded-full file:border-0
             file:text-sm file:font-semibold
-            file:bg-accent file:bg-opacity-10 dark:bg-opacity-20 file:text-accent
-            hover:file:bg-violet-100 file:cursor-pointer"
+            file:bg-accent/10 dark:file:bg-accent/20 file:text-accent
+            hover:file:bg-accent/20 dark:hover:file:bg-accent/30 file:cursor-pointer file:transition-colors file:duration-200"
             accept=".jpg, .jpeg, .png"
           ></input>
         </label>
@@ -78,7 +82,7 @@ export default function AddProduct() {
         </label>
         <label htmlFor="category" className="z-20">
           Состав
-          <MyListbox id="category" items={items} />
+          <ReactTagsDemo />
         </label>
         <button
           type="submit"
