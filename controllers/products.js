@@ -2,7 +2,7 @@ const ErrorResponse = require("../utils/errorResponse");
 const Products = require("../models/Product");
 
 exports.createProduct = async (req, res, next) => {
-  const { title, description, price, status, category, imgUrl, composition } =
+  const { title, description, price, status, category, image, composition } =
     req.body;
 
   if (!title || !price || !status) {
@@ -24,7 +24,7 @@ exports.createProduct = async (req, res, next) => {
       price,
       status,
       category,
-      imgUrl,
+      image,
       composition,
     });
     res.status(200).json({ success: true, data: "Товар добавлен" });
@@ -73,3 +73,5 @@ exports.deleteProduct = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.uploadImage = async (req, res, next) => {};

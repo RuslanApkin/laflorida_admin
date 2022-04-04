@@ -97,7 +97,7 @@ export const ProductList = () => {
       {
         Header: " ",
         Cell: ImgCell,
-        imgAccessor: "imgUrl",
+        imgAccessor: "image",
       },
       {
         Header: "Название",
@@ -145,8 +145,7 @@ export const ProductList = () => {
           setPrivateData(response.data.data);
         })
         .catch((err) => {
-          localStorage.removeItem("authToken");
-          setError("You are not authorized please login");
+          setError(err.response.data.error);
         });
     };
 

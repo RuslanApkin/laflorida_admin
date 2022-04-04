@@ -120,7 +120,7 @@ export function ImgCell({ value, column, row }) {
   return (
     <div className="flex-shrink-0 h-14 w-14">
       <img
-        className="h-full w-full rounded-md object-contain object-center"
+        className="h-full w-full rounded-md object-cover object-center"
         src={row.original[column.imgAccessor] || defaultImg}
         alt=""
       />

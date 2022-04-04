@@ -4,9 +4,11 @@ const app = express();
 const cors = require("cors");
 const connectDB = require("./config/db");
 const errorHandler = require("./middleware/error");
+var bodyParser = require("body-parser");
 
 connectDB();
-
+app.use(bodyParser.json({ limit: "16mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "16mb", extended: true }));
 app.use(express.json());
 app.use(cors());
 

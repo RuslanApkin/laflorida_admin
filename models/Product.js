@@ -28,7 +28,7 @@ const ProductSchema = new mongoose.Schema({
   composition: {
     type: [String],
   },
-  imgUrl: {
+  image: {
     type: String,
   },
   //   author: {

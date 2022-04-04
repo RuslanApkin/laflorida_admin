@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { MyListbox, ReactTagsDemo } from "./FormComponenets";
+import { Convert } from "mongo-image-converter";
+import { CheckIcon } from "@heroicons/react/solid";
 import axios from "axios";
 
 const items1 = [
@@ -16,43 +18,59 @@ const items2 = [
 
 export default function AddProduct() {
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const [success, setSuccess] = useState(false);
   const [info, setInfo] = useState({
     title: "",
     description: "",
-    price: "",
-    imgUrl: "",
+    price: 0,
   });
   const [category, setCategory] = useState(items1[0]);
   const [status, setStatus] = useState(items2[0]);
   const [composition, setComposition] = useState([]);
+  const [imageFile, setImageFile] = useState("");
   const addProductHandler = async (e) => {
     e.preventDefault();
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-      },
-    };
-    const request = {
-      ...info,
-      category: category.name,
-      status: status.name,
-      composition: composition.map((a) => a.text),
-    };
-    console.log(request);
+    try {
+      const convertedImage = await Convert(imageFile);
+      if (convertedImage) {
+        console.log(convertedImage);
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+          },
+        };
+        const request = {
+          ...info,
+          image: convertedImage,
+          category: category.name,
+          status: status.name,
+          composition: composition.map((a) => a.text),
+        };
+        console.log(request);
 
-    axios
-      .post("http://127.0.0.1:5000/api/products/create", request, config)
-      .then((response) => {
-        setInfo({ title: "", description: "", price: "", imgUrl: "" });
-      })
-      .catch((err) => {
-        setError(err.response.data.error);
-        setTimeout(() => {
-          setError("");
-        }, 3000);
-      });
+        axios
+          .post("http://127.0.0.1:5000/api/products/create", request, config)
+          .then((response) => {
+            setSuccess(true);
+            setTimeout(() => {
+              setSuccess(false);
+            }, 1000);
+            setInfo({ title: "", description: "", price: 0 });
+            setImageFile("");
+          })
+          .catch((err) => {
+            setError(err.response.data.error);
+            setTimeout(() => {
+              setError("");
+            }, 3000);
+          });
+      } else {
+        console.log("The file is not in format of image/jpeg or image/png");
+      }
+    } catch (error) {
+      console.warn(error.message);
+    }
   };
 
   const handleChange = (e) => {
@@ -68,6 +86,11 @@ export default function AddProduct() {
       <h2 className="mb-4 text-xl">Добавление товаров</h2>
       {error ? (
         <span className="error-message">{error}</span>
+      ) : success ? (
+        <div className="flex f-full h-1/3 flex-row w-full gap-2 justify-center items-center">
+          <CheckIcon className="w-7 h-7 text-accent" />
+          <p className="text-xl font-bold text-accent">Товар добавлен!</p>
+        </div>
       ) : (
         <form
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 items-start relative pb-20 mb-20"
@@ -132,8 +155,7 @@ export default function AddProduct() {
             file:bg-accent/10 dark:file:bg-accent/20 file:text-accent
             hover:file:bg-accent/20 dark:hover:file:bg-accent/30 file:cursor-pointer file:transition-colors file:duration-200"
               accept=".jpg, .jpeg, .png"
-              value={info.imgUrl}
-              onChange={handleChange}
+              onChange={(e) => setImageFile(e.target.files[0])}
               name="imgUrl"
             ></input>
           </label>
